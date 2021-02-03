@@ -18,11 +18,11 @@ function findById(id) {
 }
 
 function findSteps(id) {
-    return db('schemes as sc')
-        .join('steps as st', 'sc.id', '=', 'st.scheme_id')
-        .select('st.id', 'sc.scheme_name', 'st.step_number', 'st.instructions')
-        .where('sc_id','=', id)
-        .orderBy('st.step_number')  
+    return db('schemes')
+        .join('steps', 'schemes.id', '=', 'steps.scheme_id')
+        .select('steps.id', 'schemes.scheme_name', 'steps.step_number', 'step.instructions')
+        .where({'schemes.id': id})
+        .orderBy('steps.step_number')  
 }
 
 function add(scheme) {
